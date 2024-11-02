@@ -1,8 +1,10 @@
-# RegistrationOffice project
+# AssignmentManager project
 
 ## Some comments about Makefile
 Within the Makefile you can also compile using:
+```bash
 find $(SRC_DIR) -name "*.java" | xargs javac -cp $(BIN_DIR) -d $(BIN_DIR)
+```
 
 ## For rendering the Readme.md in VScode
 press Ctrl + Shift + V
