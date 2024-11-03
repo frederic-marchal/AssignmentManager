@@ -41,7 +41,7 @@ public class AssignmentsBrain {
     int priority = scanner.nextInt();
     scanner.nextLine();
 
-    Assignment newAssignment = new Assignment(name, deadline, description, priority);
+    Assignment newAssignment = new Assignment(name, description, deadline, priority);
     assignments.add(newAssignment);
 
     System.out.println("Assignment added! 🎉");
@@ -57,6 +57,7 @@ public class AssignmentsBrain {
         if (assignment.getName().equalsIgnoreCase(completeName)) {
             assignment.setCompleted(true);
             System.out.println("Assignment marked as completed. ✅");
+            saveAssignment();
             return;
         }
     }
@@ -72,6 +73,7 @@ public class AssignmentsBrain {
       if (assignment.getName().equalsIgnoreCase(incompleteName)) {
         assignment.setCompleted(false);
         System.out.println("Assignment marked as incomplete. ❌");
+        saveAssignment();
         return;
       }
     }
@@ -119,7 +121,7 @@ public class AssignmentsBrain {
 
             case 3:
                 System.out.println("Current deadline: " + assignmentToEdit.getDeadline());
-                System.out.println("Enter new deadline (DD.MM.YYYY):");
+                System.out.println("Enter new deadline:");
                 assignmentToEdit.setDeadline(scanner.nextLine());
                 System.out.println("Assignment deadline edited! 🎉");
                 break;
@@ -139,13 +141,13 @@ public class AssignmentsBrain {
                 System.out.println("Current description: " + assignmentToEdit.getDescription());
                 System.out.println("Enter new description:");
                 assignmentToEdit.setDescription(scanner.nextLine());
+                System.out.println("Current deadline: " + assignmentToEdit.getDeadline());
+                System.out.println("Enter new deadline:");
+                assignmentToEdit.setDeadline(scanner.nextLine());
                 System.out.println("Current priority: " + assignmentToEdit.getPriority());
                 System.out.println("Enter new priority (1-3):");
                 assignmentToEdit.setPriority(scanner.nextInt());
                 scanner.nextLine();
-                System.out.println("Current deadline: " + assignmentToEdit.getDeadline());
-                System.out.println("Enter new deadline (DD.MM.YYYY):");
-                assignmentToEdit.setDeadline(scanner.nextLine());
                 System.out.println("Assignment edited! 🎉");
                 break;
 
@@ -167,6 +169,7 @@ public class AssignmentsBrain {
       if (assignment.getName().equalsIgnoreCase(deleteName)) {
         assignments.remove(assignment);
         System.out.println("Assignment deleted. 🗑️");
+        saveAssignment();
         return;
       }
     }
@@ -197,24 +200,24 @@ public class AssignmentsBrain {
         } catch (IOException ex) {
             System.err.println(ex);
         }
-    }
+  }
 
-    public void saveAssignment() {
-    try (FileWriter writer = new FileWriter("assignments.csv")) {
-        for (Assignment assignment : assignments) {
-            writer.write(
-                assignment.getName() + "," +
-                assignment.getDeadline() + "," +
-                assignment.getDescription() + "," +
-                assignment.getPriority() + "," +
-                assignment.getCompleted() + "\n"
-            );
-        }
-        System.out.println("Assignments saved! 💾");
+  public void saveAssignment() {
+  try (FileWriter writer = new FileWriter("assignments.csv")) {
+      for (Assignment assignment : assignments) {
+          writer.write(
+              assignment.getName() + "," +
+              assignment.getDescription() + "," +
+              assignment.getDeadline() + "," +
+              assignment.getPriority() + "," +
+              assignment.getCompleted() + "\n"
+          );
+      }
+    System.out.println("Saved! 💾");
     } catch (IOException ex) {
-        System.err.println(ex);
+      System.err.println(ex);
     }
-}
+  }
 
     public void clearTerminal() {
       try {
@@ -227,5 +230,5 @@ public class AssignmentsBrain {
       } catch (Exception ex) {
           System.err.println(ex);
       }
-  }
+    }
 }
