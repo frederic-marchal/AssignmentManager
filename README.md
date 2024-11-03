@@ -1,16 +1,6 @@
 # AssignmentManager project
 
-## Some comments about Makefile
-Within the Makefile you can also compile using:
-```bash
-find $(SRC_DIR) -name "*.java" | xargs javac -cp $(BIN_DIR) -d $(BIN_DIR)
-```
-
-## For rendering the Readme.md in VScode
-press Ctrl + Shift + V
-
-# My Java Project
-
+## Overview
 This project is a Java program that manages a catalog of assignments, allowing users to add, modify, and remove assignments.
 
 ## Table of Contents
@@ -71,6 +61,12 @@ To run the application using the JAR file:
 ```bash
 make run-jar
 ```
+
+### Example Commands
+
+- **Add Assignment**: Follow the instructions to input assignment details.
+- **View Assignments**: Displays all current assignments.
+- **Edit or Delete Assignments**: Select an assignment by index to edit or delete it.
 
 ## License
 
