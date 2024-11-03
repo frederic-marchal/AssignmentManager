@@ -2,12 +2,14 @@ package domain;
 
 public class Assignment {
 
+  // Attributes
   private String name = "";
   private String description = "";
   private String deadline = "";
   private boolean completion = false;
   private int priority = 0;
 
+  // Constructor
   public Assignment(String name, String description, String deadline, int priority) {
     this.name = name;
     this.description = description;
@@ -15,6 +17,7 @@ public class Assignment {
     this.priority = priority;
   }
 
+  // Getters and Setters
   public void setName(String name) {
     this.name = name;
   }
@@ -55,6 +58,7 @@ public class Assignment {
     return this.completion;
   }
 
+  // toString method
   public String toString() {
     String Emoji;
 

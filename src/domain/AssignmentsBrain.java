@@ -7,18 +7,25 @@ import java.util.Scanner;
 
 public class AssignmentsBrain {
 
+  // Array to store Asignments
   private ArrayList<Assignment> assignments = new ArrayList<>();
+
+  // Scanner object to read user-input
   Scanner scanner = new Scanner(System.in);
 
+  // Method to only print the names of all assignments
   public void printAllAssignmentNames() {
-    System.out.println("\nAssignment Names:");
-        for (Assignment assignment : assignments) {
-            System.out.println("- " + assignment.getName());
-        }
-    System.out.println("\n");
+    clearTerminal();
+    System.out.println("Assignment Names:");
+    for (int i = 0; i < assignments.size(); i++) {
+      System.out.println(i + 1 + ". " + assignments.get(i).getName());
     }
+    System.out.println("\n");
+  }
 
+  // Method to print all assignments
   public ArrayList<Assignment> viewAssignments() {
+    clearTerminal();
     System.out.println("\nAll Assignments: \n");
     for (Assignment assignment : assignments) {
         System.out.println(assignment);
@@ -27,16 +34,21 @@ public class AssignmentsBrain {
     return assignments;
   }
 
+  // Method for creating an assignment
   public void addAssignment() {
+    clearTerminal();
     System.out.println("Enter assignment name:");
     String name = scanner.nextLine();
 
+    clearTerminal();
     System.out.println("Enter description:");
     String description = scanner.nextLine();
 
+    clearTerminal();
     System.out.println("Enter deadline:");
     String deadline = scanner.nextLine();
 
+    clearTerminal();
     System.out.println("Enter priority (1-3):");
     int priority = scanner.nextInt();
     scanner.nextLine();
@@ -44,56 +56,58 @@ public class AssignmentsBrain {
     Assignment newAssignment = new Assignment(name, description, deadline, priority);
     assignments.add(newAssignment);
 
+    clearTerminal();
     System.out.println("Assignment added! 🎉");
     saveAssignment();
   }
 
+  // Method to change the completion of a selcted assignment from false to true
   public void markAsCompleted() {
     printAllAssignmentNames();
-    System.out.println("Which assignment would you like to mark as completed?");
-    String completeName = scanner.nextLine();
+    System.out.println("Which assignment would you like to mark as completed? (Enter the number)");
+    int index = scanner.nextInt();
+    scanner.nextLine();
 
-    for (Assignment assignment : assignments) {
-        if (assignment.getName().equalsIgnoreCase(completeName)) {
-            assignment.setCompleted(true);
-            System.out.println("Assignment marked as completed. ✅");
-            saveAssignment();
-            return;
-        }
-    }
-    System.out.println("This assignment doesn't exist... 🤔");
-  }
-
-  public void markAsIncomplete() {
-    printAllAssignmentNames();
-    System.out.println("Which assignment would you like to mark as incomplete?");
-    String incompleteName = scanner.nextLine();
-
-    for (Assignment assignment : assignments) {
-      if (assignment.getName().equalsIgnoreCase(incompleteName)) {
-        assignment.setCompleted(false);
-        System.out.println("Assignment marked as incomplete. ❌");
+    clearTerminal();
+    if (index > 0 && index <= assignments.size()) {
+        assignments.get(index - 1).setCompleted(true);
+        System.out.println("Assignment marked as completed. ✅");
         saveAssignment();
         return;
-      }
     }
+    clearTerminal();
     System.out.println("This assignment doesn't exist... 🤔");
   }
 
+  // Method to change the completion of a selcted assignment from true to false
+  public void markAsIncomplete() {
+    printAllAssignmentNames();
+    System.out.println("Which assignment would you like to mark as completed? (Enter the number)");
+    int index = scanner.nextInt();
+    scanner.nextLine();
+
+    clearTerminal();
+    if (index > 0 && index <= assignments.size()) {
+      assignments.get(index - 1).setCompleted(false);
+      System.out.println("Assignment marked as incomplete. ❌");
+      saveAssignment();
+      return;
+    }
+    clearTerminal();
+    System.out.println("This assignment doesn't exist... 🤔");
+  }
+
+  // Method to edit a selected assignment including having the option to change only a specific attribute
   public void editChosenAssignment() {
     printAllAssignmentNames();
-    System.out.println("Which assignment would you like to edit?");
-    String editName = scanner.nextLine();
+    System.out.println("Which assignment would you like to edit? (Enter the number)");
+    int index = scanner.nextInt();
+    scanner.nextLine();
 
-    Assignment assignmentToEdit = null;
-    for (Assignment assignment : assignments) {
-        if (assignment.getName().equalsIgnoreCase(editName)) {
-            assignmentToEdit = assignment;
-            break;
-        }
-    }
+    clearTerminal();
+    if (index > 0 && index <= assignments.size()) {
+      Assignment assignmentToEdit = assignments.get(index - 1);
 
-    if (assignmentToEdit != null) {
         System.out.println("What would you like to edit?");
         System.out.println("(1) Name");
         System.out.println("(2) Description");
@@ -106,76 +120,94 @@ public class AssignmentsBrain {
 
         switch (editChoice) {
             case 1:
+                clearTerminal();
                 System.out.println("Current Name: " + assignmentToEdit.getName());
                 System.out.println("Enter new name:");
                 assignmentToEdit.setName(scanner.nextLine());
+                clearTerminal();
                 System.out.println("Assignment name edited! 🎉");
                 break;
 
             case 2:
+                clearTerminal();
                 System.out.println("Current description: " + assignmentToEdit.getDescription());
                 System.out.println("Enter new description:");
                 assignmentToEdit.setDescription(scanner.nextLine());
+                clearTerminal();
                 System.out.println("Assignment description edited! 🎉");
                 break;
 
             case 3:
+                clearTerminal();
                 System.out.println("Current deadline: " + assignmentToEdit.getDeadline());
                 System.out.println("Enter new deadline:");
                 assignmentToEdit.setDeadline(scanner.nextLine());
+                clearTerminal();
                 System.out.println("Assignment deadline edited! 🎉");
                 break;
 
             case 4:
+                clearTerminal();
                 System.out.println("Current priority: " + assignmentToEdit.getPriority());
                 System.out.println("Enter new priority (1-3):");
                 assignmentToEdit.setPriority(scanner.nextInt());
                 scanner.nextLine();
+                clearTerminal();
                 System.out.println("Assignment priority edited! 🎉");
                 break;
 
             case 5:
+                clearTerminal();
                 System.out.println("Current Name: " + assignmentToEdit.getName());
                 System.out.println("Enter new name:");
                 assignmentToEdit.setName(scanner.nextLine());
+                clearTerminal();
                 System.out.println("Current description: " + assignmentToEdit.getDescription());
                 System.out.println("Enter new description:");
                 assignmentToEdit.setDescription(scanner.nextLine());
+                clearTerminal();
                 System.out.println("Current deadline: " + assignmentToEdit.getDeadline());
                 System.out.println("Enter new deadline:");
                 assignmentToEdit.setDeadline(scanner.nextLine());
+                clearTerminal();
                 System.out.println("Current priority: " + assignmentToEdit.getPriority());
                 System.out.println("Enter new priority (1-3):");
                 assignmentToEdit.setPriority(scanner.nextInt());
                 scanner.nextLine();
+                clearTerminal();
                 System.out.println("Assignment edited! 🎉");
                 break;
 
             default:
+                clearTerminal();
                 System.out.println("That wasn't the right input. Please try again. 🤔");
         }
         saveAssignment();
     } else {
+        clearTerminal();
         System.out.println("This assignment doesn't exist... 🤔");
     }
   }
 
+  // Method to delete a selected assignment
   public void deleteAssignment() {
     printAllAssignmentNames();
-    System.out.println("Which assignment would you like to delete?");
-    String deleteName = scanner.nextLine();
+    System.out.println("Which assignment would you like to delete? (Enter the number)");
+    int index = scanner.nextInt();
+    scanner.nextLine();
 
-    for (Assignment assignment : assignments) {
-      if (assignment.getName().equalsIgnoreCase(deleteName)) {
-        assignments.remove(assignment);
-        System.out.println("Assignment deleted. 🗑️");
-        saveAssignment();
-        return;
-      }
+    if (index > 0 && index <= assignments.size()) {
+      assignments.remove(index - 1);
+      clearTerminal();
+      System.out.println("Assignment deleted. 🗑️");
+      saveAssignment();
+      return;
     }
+    clearTerminal();
     System.out.println("This assignment doesn't exist... 🤔");
   }
 
+  // Method for loading existing assignments from the csv file
   public void loadAssignments() {
         try {
             File file = new File("assignments.csv");
@@ -202,6 +234,7 @@ public class AssignmentsBrain {
         }
   }
 
+  // Method for saving changes onto the csv file
   public void saveAssignment() {
   try (FileWriter writer = new FileWriter("assignments.csv")) {
       for (Assignment assignment : assignments) {
@@ -213,22 +246,23 @@ public class AssignmentsBrain {
               assignment.getCompleted() + "\n"
           );
       }
-    System.out.println("Saved! 💾");
+    System.out.println("Saved! 💾 \n");
     } catch (IOException ex) {
       System.err.println(ex);
     }
   }
 
-    public void clearTerminal() {
-      try {
-          if (System.getProperty("os.name").contains("Windows")) {
-              new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
-          } else {
-              System.out.print("\033[H\033[2J");
-              System.out.flush();
+  // Method to clear the terminal (it gets full rather fast)
+  public void clearTerminal() {
+    try {
+      if (System.getProperty("os.name").contains("Windows")) {
+          new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+        } else {
+          System.out.print("\033[H\033[2J");
+          System.out.flush();
           }
-      } catch (Exception ex) {
-          System.err.println(ex);
+    } catch (Exception ex) {
+      System.err.println(ex);
       }
     }
 }

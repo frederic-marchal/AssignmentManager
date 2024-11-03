@@ -2,27 +2,33 @@ package presentation;
 import domain.*;
 import java.util.Scanner;
 
-public class Main {
+public class UserInterface {
     public static void main(String[] args) {
+
+        // Initialize Scanner and AssignmentsBrain Object
         AssignmentsBrain brain = new AssignmentsBrain();
         Scanner scanner = new Scanner(System.in);
         boolean loop = true;
 
+        // Load data from the csv File
         brain.loadAssignments();
 
+        // While loop is true it will keep on going
         while (loop == true) {
-            System.out.println("\nChoose an option:");
+
+          // asking user to chose an option that will direct the code to the needed method
+            System.out.println("Choose an option:");
             System.out.println("(1) View All Assignments");
             System.out.println("(2) Add Assignment");
             System.out.println("(3) Edit Assignment");
             System.out.println("(4) Mark Assignment as Completed");
             System.out.println("(5) Mark Assignment as Incomplete");
             System.out.println("(6) Delete Assignment");
-            System.out.println("(7) Clean up Terminal");
-            System.out.println("(8) Exit");
+            System.out.println("(7) Exit");
 
             if (scanner.hasNextInt() == false) {
-                System.out.println("Well... this wasn't a option 🤔");
+                brain.clearTerminal();
+                System.out.println("\nWell... this wasn't a option 🤔 \n");
                 scanner.nextLine();
                 continue;
             }
@@ -56,17 +62,14 @@ public class Main {
                     break;
 
                 case 7:
-                    brain.clearTerminal();
-                    break;
-
-                case 8:
                     System.out.println("Goodbye! 🖖");
                     scanner.close();
                     loop = false;
                     break;
 
                 default:
-                    System.out.println("Well... this wasn't a option 🤔");
+                    brain.clearTerminal();
+                    System.out.println("\nWell... this wasn't a option 🤔 \n");
                     break;
             }
         }
