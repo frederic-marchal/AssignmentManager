@@ -82,4 +82,9 @@ public class Assignment {
         return "Name: " + this.name + "\nDescription: " + this.description + "\nDeadline: " + this.deadline + "\nPriority: " + Emoji + "\nStatus: Incomplete ❌";
     }
   }
+
+  // equals method
+  public boolean equals(Assignment assignment) {
+    return this.name.equals(assignment.getName()) && this.description.equals(assignment.getDescription()) && this.deadline.equals(assignment.getDeadline()) && this.priority == assignment.getPriority();
+  }
 }

@@ -54,12 +54,27 @@ public class AssignmentsBrain {
     scanner.nextLine();
 
     Assignment newAssignment = new Assignment(name, description, deadline, priority);
-    assignments.add(newAssignment);
 
-    clearTerminal();
-    System.out.println("Assignment added! 🎉");
-    saveAssignment();
-  }
+    // Check if the assignment already exists
+    boolean isDuplicate = false;
+    for (Assignment assignment : assignments) {
+        if (newAssignment.equals(assignment)) {
+            isDuplicate = true;
+            break;
+        }
+    }
+
+    if (isDuplicate) {
+        clearTerminal();
+        System.out.println("Duplicate detected! 🚫");
+    } else {
+        assignments.add(newAssignment);
+        clearTerminal();
+        System.out.println("Assignment added! 🎉");
+        saveAssignment();
+    }
+}
+
 
   // Method to change the completion of a selcted assignment from false to true
   public void markAsCompleted() {
